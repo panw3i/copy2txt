@@ -1,26 +1,32 @@
 import React from "react";
-import logo from "@assets/img/logo.svg";
 import "@pages/popup/Popup.css";
 
 const Popup = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/pages/popup/Popup.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React!
-        </a>
-      </header>
-    </div>
-  );
+
+    const handleClick = () => {
+        chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
+            console.log("test")
+            chrome.tabs.sendMessage(tabs[0].id, {action: 'getSelection'}, function (response) {
+                console.log(response);
+            });
+        });
+    }
+
+    const handleCopy = () => {
+        chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
+            chrome.tabs.sendMessage(tabs[0].id, {action: 'copyAll'}, function (response) {
+                console.log(response);
+            });
+        });
+    }
+    return (
+        <div className="App">
+            <header className="App-header">
+                <button onClick={handleClick}>Download Selected Text</button>
+                <button onClick={handleCopy}>Copy All Content</button>
+            </header>
+        </div>
+    );
 };
 
 export default Popup;
