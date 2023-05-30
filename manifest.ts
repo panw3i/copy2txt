@@ -20,7 +20,7 @@ const manifest: chrome.runtime.ManifestV3 = {
     icons: {
         "128": "icon-128.png",
     },
-    permissions: ["activeTab", "downloads"],
+    permissions: ["activeTab"],
     content_scripts: [
         {
             matches: ["http://*/*", "https://*/*", "<all_urls>"],
@@ -29,7 +29,7 @@ const manifest: chrome.runtime.ManifestV3 = {
             css: ["assets/css/contentStyle<KEY>.chunk.css"],
         },
     ],
-    devtools_page: "src/pages/devtools/index.html",
+    // devtools_page: "src/pages/devtools/index.html",
     web_accessible_resources: [
         {
             resources: [
