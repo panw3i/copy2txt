@@ -1,12 +1,10 @@
-import { useEffect } from "react";
+import {useEffect} from "react";
+import {Readability} from "@mozilla/readability";
+
 
 export default function App() {
-  useEffect(() => {
-    console.log("content view loaded");
-    chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-      if (request.action === 'getSelection') {
-        // Get the current selection
-        const selectedText = window.getSelection().toString();
+
+    const downloadText = (selectedText) => {
         // Create a Blob object with the selected text
         const blob = new Blob([selectedText], {type: 'text/plain'});
 
@@ -30,9 +28,29 @@ export default function App() {
 
         // Remove the 'a' element from the body
         document.body.removeChild(a);
-      }
-    });
-  }, []);
+    }
 
-  return <div className="content-view">content view</div>;
+    function parsePageContent() {
+        const docClone = document.cloneNode(true);
+        const article = new Readability(docClone as Document).parse();
+        return article.textContent;
+    }
+
+    useEffect(() => {
+        chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+            if (request.action === 'getSelection') {
+                downloadText( window.getSelection().toString());
+            }
+            if (request.action === 'copyAll') {
+                const content = parsePageContent();
+                sendResponse(content);
+            }
+            if (request.action === 'downloadSimpleContent') {
+                const content = parsePageContent();
+                downloadText(content);
+            }
+        });
+    }, []);
+
+    return <div className="content-view">content view</div>;
 }

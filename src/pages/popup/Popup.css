@@ -1,45 +1,84 @@
+#app-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    background-color: #F5F5F5;
+    font-family: 'Roboto', sans-serif;
+    padding: 10px;
+}
 .App {
-  position: absolute;
-  top: 0px;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
-  text-align: center;
-  height: 100%;
-  padding: 10px;
-  background-color: #282c34;
-}
-
-.App-logo {
-  height: 30vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  height: 100vh;
+  background-color: #F5F5F5;
+  font-family: 'Roboto', sans-serif;
 }
 
-.App-link {
-  color: #61dafb;
+.App-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  margin-top: 2rem;
+  padding: 1rem;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  color: #ffffff;
+  padding: 10px 20px;
+  width: 80%;
+  margin: 10px 0;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+button svg {
+  margin-right: 8px;
+}
+
+button:hover {
+  transform: scale(1.02);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+button:nth-child(1) {
+  background-color: #FFB74D; /* Orange */
+}
+
+button:nth-child(1):hover {
+  background-color: #FFA726;
+}
+
+button:nth-child(2) {
+  background-color: #4FC3F7; /* Blue */
+}
+
+button:nth-child(2):hover {
+  background-color: #29B6F6;
+}
+
+button:nth-child(3) {
+  background-color: #AED581; /* Green */
+}
+
+button:nth-child(3):hover {
+  background-color: #9CCC65;
 }
